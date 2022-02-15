@@ -6,9 +6,10 @@
 .custom-shadow  {
     box-shadow: 0px 3px 4px  rgba(0, 0, 0, 0.027) inset , -3px 0px 4px  rgb(0 0 0 / 0.027)inset;;
 }
-main{
+main , aside{
     scrollbar-width: thin;
 }
-main::-webkit-scrollbar {
+main::-webkit-scrollbar ,
+aside::-webkit-scrollbar {
     width: 5px;
 }

@@ -37,55 +37,58 @@
             <tr
               class="text-xs font-semibold tracking-wide text-right text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
             >
-              <th class="px-4 py-3">Client</th>
-              <th class="px-4 py-3">Amount</th>
-              <th class="px-4 py-3">Status</th>
-              <th class="px-4 py-3">Date</th>
+              <th class="px-4 py-3">نام</th>
+              <th class="px-4 py-3">ایمیل</th>
+              <th class="px-4 py-3">تاریخ ورود</th>
+              <th class="px-4 py-3">اقدامات</th>
             </tr>
           </thead>
           <tbody
             class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
           >
-            <tr class="text-gray-700 dark:text-gray-400">
-              <td class="px-4 py-3">
-                <div class="flex items-center text-sm">
-                  <!-- Avatar with inset shadow -->
-                  <div
-                    class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
-                  >
-                    <img
-                      class="object-cover w-full h-full rounded-full"
-                      src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                      alt=""
-                      loading="lazy"
-                    />
+            @forelse ($users as $user)
+              <tr class="text-gray-700 dark:text-gray-400" >
+                <td class="px-4 py-3">
+                  <div class="flex items-center text-sm">
+                    <!-- Avatar with inset shadow -->
                     <div
-                      class="absolute inset-0 rounded-full shadow-inner"
-                      aria-hidden="true"
-                    ></div>
+                      class="relative hidden w-8 h-8 ml-3 rounded-full md:block"
+                    >
+                      <img
+                        class="object-cover w-full h-full rounded-full"
+                        src="{{$user->profile_photo_url }}"
+                        alt=""
+                        loading="lazy"
+                      />
+                      <div
+                        class="absolute inset-0 rounded-full shadow-inner"
+                        aria-hidden="true"
+                      ></div>
+                    </div>
+                    <div>
+                      <p class="font-semibold">{{$user->username}}</p>
+                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                         Developer
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p class="font-semibold">Hans Burger</p>
-                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                      10x Developer
-                    </p>
-                  </div>
-                </div>
-              </td>
-              <td class="px-4 py-3 text-sm">
-                $ 863.45
-              </td>
-              <td class="px-4 py-3 text-xs">
-                <span
-                  class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
-                >
-                  Approved
-                </span>
-              </td>
-              <td class="px-4 py-3 text-sm">
-                6/10/2020
-              </td>
+                </td>
+                <td class="px-4 py-3 text-sm">
+                  {{$user->email}}
+                </td>
+                <td class="px-4 py-3 text-xs">
+                   {{$user->created_at}}
+                </td>
+                <td class="px-4 py-3 text-sm">
+                  <x-jet-button wire:click="showEditForm({{$user->id}})" class="bg-yellow-400 hover:bg-yellow-500" >ویرایش</x-jet-button>
+                  <x-jet-button wire:click="deleteUser({{$user->id}})" class="bg-red-400 hover:bg-red-500 whitespace-nowrap"> &ThinSpace; حذف &ThinSpace; </x-jet-button>
+                </td>
+              </tr>
+            @empty
+            <tr class="text-gray-700 dark:text-gray-400" >
+              <small>کاربری وجود ندارد</small>
             </tr>
+            @endforelse
           </tbody>
         </table>
       </div>
@@ -190,9 +193,7 @@
     <x-jet-modal wire:model="showFormModal" >
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" class="p-4" wire:submit.prevent="storeUser">
-            @csrf
-
+        <form  class="p-4" >
             <div class="flex flex-col md:flex-row justify-between md:gap-x-4">
                 <div class="flex-1">
                     <x-jet-label for="username" value="{{ __('نام کاربری') }}" />
@@ -215,10 +216,12 @@
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" wire:model="email" :value="old('email')" required />
             </div>
 
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('رمز عبور') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" wire:model="password" required autocomplete="new-password" />
-            </div>
+            @if(!$editModeModal)
+              <div class="mt-4">
+                  <x-jet-label for="password" value="{{ __('رمز عبور') }}" />
+                  <x-jet-input id="password" class="block mt-1 w-full" type="password" wire:model="password" required autocomplete="new-password" />
+              </div>
+            @endif
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
                     <x-jet-label for="terms">
@@ -237,9 +240,15 @@
             @endif
 
             <div class="flex items-center justify-end mt-4">
-                <x-jet-button class="ml-4">
+               @if(!$editModeModal)
+                <x-jet-button class="ml-4" wire:click="storeUser">
                     {{ __('ثبت ') }}
                 </x-jet-button>
+               @else
+                <x-jet-button class="ml-4" wire:click="updateUser">
+                    {{ __('ویرایش ') }}
+                </x-jet-button>
+               @endif
             </div>
         </form>
     </x-jet-modal>

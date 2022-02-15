@@ -9,12 +9,15 @@ use App\Models\User;
 class UserIndex extends Component
 {
     public $showFormModal = false ;
+    public $editModeModal = false ; 
     public $search ; 
     public $username ;
     public $firstName ; 
     public $lastName ; 
     public $email ; 
     public $password ; 
+    public $userId ; 
+
     public $rules = [
         'username' => ['required'] , 
         'firstName' => ['required'] , 
@@ -23,6 +26,10 @@ class UserIndex extends Component
         'password' => ['required'] , 
     ];
 
+    public function toggleModal (){
+        $this->showFormModal = true ;
+    }
+    
     public function storeUser(){
         $this->validate();
         User::create([
@@ -32,17 +39,62 @@ class UserIndex extends Component
             'email' => $this->email , 
             'password' => Hash::make($this->password)
         ]);
-        $this->toggleModal();
         $this->reset();
-        session()->flash('flash.bannerStyle', 'success');
+        session()->flash('flash.banner', 'success');
     }
 
-    public function toggleModal (){
-        $this->showFormModal = !$this->showFormModal ;
+    public function showEditForm($id){
+        $this->reset();
+        $this->showFormModal = true ; 
+        $this->editModeModal = true ;
+        $this->userId = $id ;
+        $this->loadEditForm();
     }
+
+    public function loadEditForm(){
+        $user = User::findOrFail($this->userId);
+        $this->username = $user->username ;
+        $this->firstName = $user->first_name ; 
+        $this->lastName = $user->last_name ; 
+        $this->email = $user->email; 
+    }
+
+    public function updateUser(){
+        $this->validate([
+            'username' => ['required'] , 
+            'firstName' => ['required'] , 
+            'lastName' => ['required'] , 
+            'email' => ['required' ], 
+        ]);
+        User::findOrfail($this->userId)->update([
+            'username' => $this->username , 
+            'first_name' => $this->firstName , 
+            'last_name' => $this->lastName , 
+            'email' => $this->email 
+        ]);
+        $this->reset();
+        session()->flash('flash.banner', 'success');
+
+    }
+
+    public function deleteUser($id){
+        $user= User::find($id);
+        if(auth()->user()->email == $user->email){
+            session()->flash('flash.banner', 'success');
+            $this->reset();
+            return ;
+        }
+
+        $user->delete();
+        session()->flash('flash.banner', 'deleted successfully');
+        
+    }
+
     public function render()
     {
-        return view('livewire.users.user-index')
-                ->layout('layouts.app');
+        $users = User::all();
+        return view('livewire.users.user-index'  , [
+            'users' => $users
+        ])->layout('layouts.app');
     }
 }
