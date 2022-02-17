@@ -5,6 +5,7 @@ use App\Http\Livewire\Users\UserIndex ;
 use App\Http\Livewire\Countries\CountryIndex ; 
 use App\Http\Livewire\States\StateIndex ; 
 use App\Http\Livewire\Cities\CityIndex ; 
+use App\Http\Livewire\Departments\DepartmentIndex ; 
 
 
 Route::get('/', function () {
@@ -22,4 +23,5 @@ Route::middleware(['auth:sanctum', 'verified' , 'is_admin'])->group(function(){
     Route::get('/countries' , CountryIndex::class);
     Route::get('/states' , StateIndex::class);
     Route::get('/cities' , CityIndex::class);
+    Route::get('/departments' , DepartmentIndex::class);
 });

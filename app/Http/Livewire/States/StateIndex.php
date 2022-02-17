@@ -23,6 +23,7 @@ class StateIndex extends Component
         'name' => ['required' , 'string'] 
     ];
     public function toggleModal(){
+        $this->reset();
         $this->showFormModal = true ; 
     }
 

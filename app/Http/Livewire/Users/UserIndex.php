@@ -30,6 +30,7 @@ class UserIndex extends Component
     ];
 
     public function toggleModal (){
+        $this->reset();
         $this->showFormModal = true ;
     }
     

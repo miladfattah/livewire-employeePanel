@@ -24,6 +24,7 @@ class CityIndex extends Component
     ];
 
     public function toggleModal(){
+        $this->reset();
         $this->showFormModal = true ; 
     }
 
