@@ -74,6 +74,6 @@ class CountryIndex extends Component
         $countries = Country::paginate(5);
         return view('livewire.countries.country-index' , [
             'countries' => $countries 
-        ])->layout('layouts.app');;
+        ])->layout('layouts.app');
     }
 }
