@@ -4,16 +4,8 @@ use Illuminate\Support\Facades\Route ;
 use App\Http\Livewire\Users\UserIndex ; 
 use App\Http\Livewire\Countries\CountryIndex ; 
 use App\Http\Livewire\States\StateIndex ; 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Livewire\Cities\CityIndex ; 
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,4 +21,5 @@ Route::middleware(['auth:sanctum', 'verified' , 'is_admin'])->group(function(){
     Route::get('/users' , UserIndex::class);
     Route::get('/countries' , CountryIndex::class);
     Route::get('/states' , StateIndex::class);
+    Route::get('/cities' , CityIndex::class);
 });
