@@ -2,7 +2,7 @@
     <h2
       class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
     >
-       حوزه فعالیت
+      ثبت شغل
     </h2>
 
     <div class="flex items-center justify-start">
@@ -37,8 +37,9 @@
             <tr
               class="text-xs font-semibold tracking-wide text-right text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
             >
-              <th class="px-4 py-3">نوع فعالیت</th>
-              <th class="px-4 py-3">تاریخ ثبت</th>
+              <th class="px-4 py-3">نام و نام خانوادگی</th>
+              <th class="px-4 py-3">آدرس</th>
+              <th class="px-4 py-3">تاریخ تولد</th>
               <th class="px-4 py-3">اقدامات</th>
             </tr>
           </thead>
@@ -48,19 +49,22 @@
             @forelse ($employees as $employee)
               <tr class="text-gray-700 dark:text-gray-400" >
                 <td class="px-4 py-3 text-sm">
-                  {{$employee->name}}
+                  {{$employee->first_name}} {{$employee->last_name}}
                 </td>
                 <td class="px-4 py-3 text-xs">
-                  {{$employee->created_at}}
+                  {{$employee->address}}
+                </td>
+                <td class="px-4 py-3 text-xs">
+                  {{$employee->birthdate}}
                 </td>
                 <td class="px-4 py-3 text-sm">
                   <x-jet-button wire:click="showEditForm({{$employee->id}})" class="bg-yellow-400 hover:bg-yellow-500" >ویرایش</x-jet-button>
-                  <x-jet-button  wire:click="deleteCity({{$employee->id}})" class="bg-red-400 hover:bg-red-500 whitespace-nowrap"> &ThinSpace; حذف &ThinSpace; </x-jet-button>
+                  <x-jet-button  wire:click="deleteEmployee({{$employee->id}})" class="bg-red-400 hover:bg-red-500 whitespace-nowrap"> &ThinSpace; حذف &ThinSpace; </x-jet-button>
                 </td>
               </tr>
             @empty
             <tr class="text-gray-700 dark:text-gray-400" >
-              <small>حوزه ای وجود ندارد</small>
+              <small>کاربری وجود ندارد</small>
             </tr>
             @endforelse
           </tbody>
@@ -78,10 +82,88 @@
         <form  class="p-4" >
        
             <div class="mt-4">
-                <x-jet-label for="name" value="{{ __('نوع فعالیت') }}" />
-                <x-jet-input id="name" class="block mt-1 w-full" type="text" wire:model="name" :value="old('name')" required  autocomplete="name" />
+                <x-jet-label for="last_name" value="{{ __('نام خانوادگی') }}" />
+                <x-jet-input id="last_name" class="block mt-1 w-full" type="text" wire:model="last_name" :value="old('last_name')" required  autocomplete="last_name" />
             </div>
- 
+
+            <div class="mt-4">
+              <x-jet-label for="first_name" value="{{ __('نام') }}" />
+              <x-jet-input id="first_name" class="block mt-1 w-full" type="text" wire:model="first_name" :value="old('first_name')" required  autocomplete="first_name" />
+            </div>
+
+            <div class="mt-4">
+              <x-jet-label for="middle_name" value="{{ __('نام کاربری') }}" />
+              <x-jet-input id="middle_name" class="block mt-1 w-full" type="text" wire:model="middle_name" :value="old('middle_name')" required  autocomplete="middle_name" />
+            </div>
+
+            <div class="mt-4">
+              <x-jet-label for="address" value="{{ __('آدرس') }}" />
+              <x-jet-input id="address" class="block mt-1 w-full" type="text" wire:model="address" :value="old('address')" required  autocomplete="address" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="countryID" value="{{ __('انتخاب کشور') }}" />
+                <select wire:model="country_id" id="countryID">
+                    <option>انتخاب کنید</option>
+                    @forelse (\App\Models\Country::all() as $country)
+                        <option value="{{$country->id}}">{{$country->name}}</option>
+                    @empty
+                        <option>کشوری وجود ندار</option>
+                    @endforelse
+                </select>
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="stateID" value="{{ __('انتخاب استان') }}" />
+                <select wire:model="state_id" id="stateID">
+                    <option>انتخاب کنید</option>
+                    @forelse (\App\Models\State::all() as $state)
+                        <option value="{{$state->id}}">{{$state->name}}</option>
+                    @empty
+                        <option>استانی وجود ندار</option>
+                    @endforelse
+                </select>
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="cityID" value="{{ __('انتخاب شهر') }}" />
+                <select wire:model="city_id" id="cityID">
+                    <option>انتخاب کنید</option>
+                    @forelse (\App\Models\City::all()  as $city)
+                        <option value="{{$city->id}}">{{$city->name}}</option>
+                    @empty
+                        <option>شهری وجود ندار</option>
+                    @endforelse
+                </select>
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="departmentID" value="{{ __('انتخاب حوزه') }}" />
+                <select wire:model="department_id" id="departmentID">
+                    <option>انتخاب کنید</option>
+                    @forelse (\App\Models\Department::all() as $country)
+                        <option value="{{$country->id}}">{{$country->name}}</option>
+                    @empty
+                        <option>حوزه ای وجود ندار</option>
+                    @endforelse
+                </select>
+            </div>
+
+            <div class="mt-4">
+              <x-jet-label for="zip_code" value="{{ __('زیپ کد_') }}" />
+              <x-jet-input id="zip_code" class="block mt-1 w-full" type="text" wire:model="zip_code" :value="old('zip_code')" required  autocomplete="zip_code" />
+            </div>
+
+            <div class="mt-4">
+              <x-jet-label for="birthdate" value="{{ __('تاریخ تولد') }}" />
+              <x-jet-input id="birthdate" class="block mt-1 w-full" type="text" wire:model="birthdate" :value="old('birthdate')" required  autocomplete="birthdate" />
+            </div>
+
+            <div class="mt-4">
+              <x-jet-label for="date_hired" value="{{ __('تاریخ') }}" />
+              <x-jet-input id="date_hired" class="block mt-1 w-full" type="text" wire:model="date_hired" :value="old('date_hired')" required  autocomplete="date_hired" />
+            </div>
+
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
                     <x-jet-label for="terms">
