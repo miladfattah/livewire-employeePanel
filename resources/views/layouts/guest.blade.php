@@ -16,7 +16,7 @@
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
-    <body>
+    <body class="bg-[#f9fafb]">
         <div class="min-h-screen font-Vazir text-gray-900 antialiased dark:bg-gray-700">
         <x-navbar></x-navbar>
             {{ $slot }}

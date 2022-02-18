@@ -11,7 +11,7 @@ use App\Http\Livewire\Employees\EmployeeIndex ;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -20,10 +20,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 
 Route::middleware(['auth:sanctum', 'verified' , 'is_admin'])->group(function(){
-    Route::get('/users' , UserIndex::class);
-    Route::get('/countries' , CountryIndex::class);
-    Route::get('/states' , StateIndex::class);
-    Route::get('/cities' , CityIndex::class);
-    Route::get('/departments' , DepartmentIndex::class);
-    Route::get('/employees' , EmployeeIndex::class);
+    Route::get('/users' , UserIndex::class)->name('users.index');
+    Route::get('/countries' , CountryIndex::class)->name('countries.index');
+    Route::get('/states' , StateIndex::class)->name('states.index');
+    Route::get('/cities' , CityIndex::class)->name('cities.index');
+    Route::get('/departments' , DepartmentIndex::class)->name('departments.index');
+    Route::get('/employees' , EmployeeIndex::class)->name('employees.index');
 });

@@ -1083,6 +1083,9 @@ select {
 .mr-6 {
   margin-right: 1.5rem;
 }
+.mr-4 {
+  margin-right: 1rem;
+}
 .mr-5 {
   margin-right: 1.25rem;
 }
@@ -1143,9 +1146,6 @@ select {
 .h-full {
   height: 100%;
 }
-.h-60 {
-  height: 15rem;
-}
 .h-\[30px\] {
   height: 30px;
 }
@@ -1203,11 +1203,11 @@ select {
 .w-1 {
   width: 0.25rem;
 }
-.w-\[150px\] {
-  width: 150px;
-}
 .w-5\/6 {
   width: 83.333333%;
+}
+.w-\[150px\] {
+  width: 150px;
 }
 .min-w-0 {
   min-width: 0px;
@@ -1408,12 +1408,6 @@ select {
 .rounded-bl-lg {
   border-bottom-left-radius: 0.5rem;
 }
-.rounded-tr-lg {
-  border-top-right-radius: 0.5rem;
-}
-.rounded-br-lg {
-  border-bottom-right-radius: 0.5rem;
-}
 .rounded-br-full {
   border-bottom-right-radius: 9999px;
 }
@@ -1527,12 +1521,20 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(147 51 234 / var(--tw-bg-opacity));
 }
-.bg-transparent {
-  background-color: transparent;
-}
 .bg-yellow-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 240 138 / var(--tw-bg-opacity));
+}
+.bg-transparent {
+  background-color: transparent;
+}
+.bg-home {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+.bg-\[\#f9fafb\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
@@ -2214,11 +2216,6 @@ aside::-webkit-scrollbar {
     color: rgb(216 180 254 / var(--tw-text-opacity));
   }
 
-  .dark\:text-gray-500 {
-    --tw-text-opacity: 1;
-    color: rgb(107 114 128 / var(--tw-text-opacity));
-  }
-
   .dark\:text-white {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -2324,10 +2321,6 @@ aside::-webkit-scrollbar {
     margin-left: 1.5rem;
   }
 
-  .sm\:ml-0 {
-    margin-left: 0px;
-  }
-
   .sm\:block {
     display: block;
   }
@@ -2342,10 +2335,6 @@ aside::-webkit-scrollbar {
 
   .sm\:h-10 {
     height: 2.5rem;
-  }
-
-  .sm\:h-20 {
-    height: 5rem;
   }
 
   .sm\:w-10 {
@@ -2470,10 +2459,6 @@ aside::-webkit-scrollbar {
 
   .sm\:text-left {
     text-align: left;
-  }
-
-  .sm\:text-right {
-    text-align: right;
   }
 }
 @media (min-width: 768px) {
