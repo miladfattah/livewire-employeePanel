@@ -30,7 +30,7 @@
     <script src="{{asset('js/swiper-bundle.min.js')}}"></script>
 
     <script>
-      var swiper = new Swiper(".mySwiper", {
+      var swiper = new Swiper(".firstSwiper", {
         pagination: {
           el: ".swiper-pagination",
         },
@@ -59,5 +59,7 @@
           },
         }
       });
+
+
     </script>
 </html>
