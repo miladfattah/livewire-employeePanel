@@ -7,17 +7,19 @@ use App\Http\Livewire\States\StateIndex ;
 use App\Http\Livewire\Cities\CityIndex ; 
 use App\Http\Livewire\Departments\DepartmentIndex ; 
 use App\Http\Livewire\Employees\EmployeeIndex ; 
-
+use App\Http\Controllers\ArticleController ;
+use App\Http\Controllers\AboutController ;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+Route::get('/articles', [ArticleController::class , 'index'])->name('article.index');
+Route::get('/about-us', [AboutController::class , 'index'])->name('about.index');
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
-
-
 
 Route::middleware(['auth:sanctum', 'verified' , 'is_admin'])->group(function(){
     Route::get('/users' , UserIndex::class)->name('users.index');
