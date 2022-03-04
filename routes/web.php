@@ -10,7 +10,7 @@ use App\Http\Livewire\Employees\EmployeeIndex ;
 use App\Http\Controllers\ArticleController ;
 use App\Http\Controllers\AboutController ;
 use App\Http\Controllers\ContactController ;
-
+use App\Http\Livewire\Jobs\JobIndex ;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
@@ -30,4 +30,5 @@ Route::middleware(['auth:sanctum', 'verified' , 'is_admin'])->group(function(){
     Route::get('/cities' , CityIndex::class)->name('cities.index');
     Route::get('/departments' , DepartmentIndex::class)->name('departments.index');
     Route::get('/employees' , EmployeeIndex::class)->name('employees.index');
+    Route::get('/jobs' , JobIndex::class)->name('job.index');
 });
