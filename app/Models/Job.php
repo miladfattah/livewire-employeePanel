@@ -30,5 +30,10 @@ class Job extends Model
         return $this->belongsTo(Department::class);
     }
 
+    public function user()
+    {
+        return $this->belognsTo(User::class);
+    }
+
     
 }

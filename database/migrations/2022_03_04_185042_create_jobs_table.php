@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('earn');
             $table->string('education');
             $table->boolean('soldiership')->deafult(0);
+            $table->foreignId('user_id')->constrained();
             $table->foreignId('department_id')->constrained();
             $table->foreignId('country_id')->constrained();
             $table->foreignId('state_id')->constrained();
