@@ -94,8 +94,8 @@
             </div>
 
             <div class="mt-4">
-              <x-jet-label for="departmentID" value="{{ __(' وضعیت سربازی') }}"  />
-              <select wire:model="department_id" id="departmentID" class="form-select appearance-none block
+              <x-jet-label for="soldiership" value="{{ __(' وضعیت سربازی') }}"  />
+              <select wire:model="soldiership" id="soldiership" class="form-select appearance-none block
               w-full
               pr-8
               py-1.5

@@ -49,10 +49,10 @@ class JobIndex extends Component
     }
 
     public function storeJob(){
-        dd('this is work');
         $this->validate();
         $image = $this->image->store('jobs');
         Job::create([
+            'user_id' => auth()->user()->id ,
             'company' => $this->company , 
             'title' => $this->title , 
             'address' => $this->address , 
@@ -84,6 +84,7 @@ class JobIndex extends Component
         $this->company = $job->company ; 
         $this->title = $job->title ; 
         $this->address = $job->address ; 
+        $this->description = $job->description ; 
         $this->country_id = $job->country_id ; 
         $this->state_id = $job->state_id ; 
         $this->city_id = $job->city_id ; 
@@ -95,7 +96,19 @@ class JobIndex extends Component
 
     public function updateJob(){
         $job = Job::findOrfail($this->job_id);
-        $this->validate();
+        $this->validate([
+            'company' => ['required' , 'string'] ,
+            'title' => ['required' , 'string'] ,
+            'address' => ['required' , 'string'] ,
+            'description' => ['required' , 'string'] ,
+            'country_id' => ['required'] ,
+            'state_id' => ['required'] ,
+            'city_id' => ['required'] ,
+            'department_id' => ['required'] ,
+            'earn' => ['required'] ,
+            'education' => ['required' ] ,
+            'soldiership' => ['required' ] ,
+        ]);
         $job->update([
             'company' => $this->company , 
             'title' => $this->title , 
