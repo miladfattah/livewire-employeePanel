@@ -11,6 +11,8 @@ use App\Http\Controllers\ArticleController ;
 use App\Http\Controllers\AboutController ;
 use App\Http\Controllers\ContactController ;
 use App\Http\Livewire\Jobs\JobIndex ;
+use App\Http\Livewire\Article\ArticleIndex ;
+
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
@@ -23,7 +25,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified' , 'is_admin'])->group(function(){
+Route::middleware(['auth:sanctum', 'verified' , 'is_admin'])->prefix('panel')->group(function(){
     Route::get('/users' , UserIndex::class)->name('users.index');
     Route::get('/countries' , CountryIndex::class)->name('countries.index');
     Route::get('/states' , StateIndex::class)->name('states.index');
@@ -31,4 +33,5 @@ Route::middleware(['auth:sanctum', 'verified' , 'is_admin'])->group(function(){
     Route::get('/departments' , DepartmentIndex::class)->name('departments.index');
     Route::get('/employees' , EmployeeIndex::class)->name('employees.index');
     Route::get('/jobs' , JobIndex::class)->name('job.index');
+    Route::get('/articles' , ArticleIndex::class)->name('article.index');
 });
