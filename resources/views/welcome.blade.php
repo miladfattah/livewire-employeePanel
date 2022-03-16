@@ -135,6 +135,7 @@
     </header>
 
     <section class="mt-20 py-10">
+      <h1 class="text-biscay-700 sm:text-3xl text-2xl font-bold" >آگهی استخدام  </h1>
       <div>
         <div class="swiper firstSwiper pb-6 ">
           <div class="swiper-wrapper">
