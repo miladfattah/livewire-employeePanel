@@ -16,16 +16,22 @@ use App\Http\Livewire\Article\ArticleIndex ;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+
+
 Route::get('/articles', [ArticleController::class , 'index'])->name('article.index');
 Route::get('/about-us', [AboutController::class , 'index'])->name('about.index');
 Route::get('/contact-us', [ContactController::class , 'index'])->name('contact.index');
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified' , 'is_admin'])->prefix('panel')->group(function(){
+Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+    Route::get('/dashboard' , function(){
+        return view('dashboard');
+    })->name('dashboard');
+    Route::get('/jobs' , JobIndex::class)->name('job.index');
+});
+
+Route::middleware(['auth:sanctum', 'verified' , 'is_admin'])->prefix('panel')->name('panel.')->group(function(){
     Route::get('/users' , UserIndex::class)->name('users.index');
     Route::get('/countries' , CountryIndex::class)->name('countries.index');
     Route::get('/states' , StateIndex::class)->name('states.index');

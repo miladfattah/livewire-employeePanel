@@ -46,8 +46,8 @@
             <ul>
                 <li class="relative px-6 py-3">
                 <a
-                    class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 {{ request()->routeIs('users.index') ? 'text-gray-800' : '' }} hover:text-gray-800 dark:hover:text-gray-200"
-                    href="{{route('users.index')}}"
+                    class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 {{ request()->routeIs('panel.users.index') ? 'text-gray-800' : '' }} hover:text-gray-800 dark:hover:text-gray-200"
+                    href="{{route('panel.users.index')}}"
                     >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" class="w-5 h-5">
     
@@ -76,7 +76,7 @@
                             <path d="M13.5,10.6,7.4,13.41a1,1,0,0,1-.83,0L.5,10.6" style="fill: none;stroke: #000000;stroke-linecap: round;stroke-linejoin: round"></path>
                           </g></g>
                       </svg>
-                    <span class="mr-4">اضافه کردن شغل</span>
+                    <span class="mr-4">تنظیمات ادمین</span>
                     </span>
                     <svg
                     class="w-4 h-4"
@@ -103,16 +103,16 @@
                     aria-label="submenu"
                     >
                       <li  class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                          <a class="w-full {{request()->routeIs('countries.index') ? 'text-gray-800' : ''}}" href="{{route('countries.index')}}">کشور</a>
+                          <a class="w-full {{request()->routeIs('panel.countries.index') ? 'text-gray-800' : ''}}" href="{{route('panel.countries.index')}}">کشور</a>
                       </li>
                       <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                          <a class="w-full {{request()->routeIs('states.index') ? 'text-gray-800' : ''}}" href="{{route('states.index')}}">استان</a>
+                          <a class="w-full {{request()->routeIs('panel.states.index') ? 'text-gray-800' : ''}}" href="{{route('panel.states.index')}}">استان</a>
                       </li>
                       <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                          <a class="w-full {{request()->routeIs('cities.index') ? 'text-gray-800' : ''}}" href="{{route('cities.index')}}">شهر</a>
+                          <a class="w-full {{request()->routeIs('panel.cities.index') ? 'text-gray-800' : ''}}" href="{{route('panel.cities.index')}}">شهر</a>
                       </li>
                       <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                          <a class="w-full {{request()->routeIs('departments.index') ? 'text-gray-800' : ''}}" href="{{route('departments.index')}}">حوزه</a>
+                          <a class="w-full {{request()->routeIs('panel.departments.index') ? 'text-gray-800' : ''}}" href="{{route('panel.departments.index')}}">حوزه</a>
                       </li>
                     </ul>
                 </template>
@@ -120,7 +120,14 @@
             </ul>
             <div class="px-6 my-6">
                 <a 
-                href="{{route('employees.index')}}"
+                href="{{route('panel.job.index')}}"
+                class="mb-3 flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                >
+                  ثبت آگهی
+                <span class="ml-2" aria-hidden="true">+</span>
+                </a>
+                <a 
+                href=""
                 class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                 >
                   درخواست شغل
@@ -263,8 +270,8 @@
               <ul>
                   <li class="relative px-6 py-3">
                   <a
-                      class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 {{ request()->routeIs('users.index') ? 'text-gray-800' : '' }} hover:text-gray-800 dark:hover:text-gray-200"
-                      href="{{route('users.index')}}"
+                      class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 {{ request()->routeIs('panel.users.index') ? 'text-gray-800' : '' }} hover:text-gray-800 dark:hover:text-gray-200"
+                      href="{{route('panel.users.index')}}"
                       >
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" class="w-5 h-5">
       
@@ -293,7 +300,7 @@
                               <path d="M13.5,10.6,7.4,13.41a1,1,0,0,1-.83,0L.5,10.6" style="fill: none;stroke: #000000;stroke-linecap: round;stroke-linejoin: round"></path>
                             </g></g>
                         </svg>
-                      <span class="mr-4">اضافه کردن شغل</span>
+                      <span class="mr-4">تنظیمات ادمین</span>
                       </span>
                       <svg
                       class="w-4 h-4"
@@ -320,29 +327,36 @@
                       aria-label="submenu"
                       >
                         <li  class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                            <a class="w-full {{request()->routeIs('countries.index') ? 'text-gray-800' : ''}}" href="{{route('countries.index')}}">کشور</a>
+                            <a class="w-full {{request()->routeIs('panel.countries.index') ? 'text-gray-800' : ''}}" href="{{route('panel.countries.index')}}">کشور</a>
                         </li>
                         <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                            <a class="w-full {{request()->routeIs('states.index') ? 'text-gray-800' : ''}}" href="{{route('states.index')}}">استان</a>
+                            <a class="w-full {{request()->routeIs('panel.states.index') ? 'text-gray-800' : ''}}" href="{{route('panel.states.index')}}">استان</a>
                         </li>
                         <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                            <a class="w-full {{request()->routeIs('cities.index') ? 'text-gray-800' : ''}}" href="{{route('cities.index')}}">شهر</a>
+                            <a class="w-full {{request()->routeIs('panel.cities.index') ? 'text-gray-800' : ''}}" href="{{route('panel.cities.index')}}">شهر</a>
                         </li>
                         <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                            <a class="w-full {{request()->routeIs('departments.index') ? 'text-gray-800' : ''}}" href="{{route('departments.index')}}">حوزه</a>
+                            <a class="w-full {{request()->routeIs('panel.departments.index') ? 'text-gray-800' : ''}}" href="{{route('panel.departments.index')}}">حوزه</a>
                         </li>
                       </ul>
                   </template>
                   </li>
               </ul>
               <div class="px-6 my-6">
-                  <a 
-                    href="{{route('employees.index')}}"
-                    class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                  >
-                    درخواست شغل
-                    <span class="ml-2" aria-hidden="true">+</span>
-                  </a>
+                <a 
+                href="{{route('panel.job.index')}}"
+                class="mb-3 flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                >
+                  ثبت آگهی
+                <span class="ml-2" aria-hidden="true">+</span>
+                </a>
+                <a 
+                href=""
+                class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                >
+                  درخواست شغل
+                <span class="ml-2" aria-hidden="true">+</span>
+                </a>
               </div>
             </div>
           </aside>
