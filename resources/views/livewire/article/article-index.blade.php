@@ -70,7 +70,28 @@
 
             <div class="mt-4">
               <x-jet-label for="body" value="{{ __('توضحیات مقاله') }}" />
-              <x-jet-input id="body" class="block mt-1 w-full" type="text" wire:model="body" :value="old('body')" required  autocomplete="body" />
+              <textarea
+                wire:model="body"
+                class="
+                  form-control
+                  block
+                  w-full
+                  px-3
+                  py-1.5
+                  text-base
+                  font-normal
+                  text-gray-700
+                  bg-white bg-clip-padding
+                  border border-solid border-gray-300
+                  rounded
+                  transition
+                  ease-in-out
+                  m-0
+                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                "
+                id="body"
+                rows="3"
+              ></textarea>
             </div>
 
             <div class="mt-4">
