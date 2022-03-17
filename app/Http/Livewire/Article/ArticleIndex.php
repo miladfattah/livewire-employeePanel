@@ -31,7 +31,7 @@ class ArticleIndex extends Component
 
     public function storeArticle(){
         $this->validate();
-        $image = $this->image->store('articles');
+        $image = $this->image->store('img/articles' , 'public');
         Article::create([
             'user_id' => auth()->user()->id ,
             'title' => $this->title , 

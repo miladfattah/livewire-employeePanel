@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 
 Route::get('/articles', [ArticleController::class , 'index'])->name('article.index');
-Route::get('/articles/{id}', [ArticleController::class , 'show'])->name('article.show');
+Route::get('/articles/{article}', [ArticleController::class , 'show'])->name('article.show');
 Route::get('/about-us', [AboutController::class , 'index'])->name('about.index');
 Route::get('/contact-us', [ContactController::class , 'index'])->name('contact.index');
 
